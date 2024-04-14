@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -29,6 +28,7 @@ func init(){
 	}
 	// fmt.Println("init execd")
 	templates["index.html"] = template.Must(template.ParseFiles("index.html"))
+	templates["todo.html"] = template.Must(template.ParseFiles("todo.html"))
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request){
@@ -47,7 +47,10 @@ func submitTodoHandler(w http.ResponseWriter, r *http.Request){
 	name := r.PostFormValue("name")
 	
 	todo := Todo{ Id : 4, Name: name, IsCompleted: false}
-	fmt.Println(todo)
+	// fmt.Println(todo)
+	todos = append(todos, todo)
+	tmpl := templates["todo.html"]
+	tmpl.ExecuteTemplate(w, "todo.html", todo)
 }
 
 func main(){
