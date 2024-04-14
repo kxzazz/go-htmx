@@ -15,6 +15,11 @@
       defer
       src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.8/dist/cdn.min.js"
     ></script>
+    <script
+      src="https://unpkg.com/htmx.org@1.9.11/dist/htmx.js"
+      integrity="sha384-l9bYT9SL4CAW0Hl7pAOpfRc18mys1b0wK4U8UtGnWOxPVbVMgrOdB+jyz/WY8Jue"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body class="container">
     <div class="row mt-4 g-4" x-data="{todos: {{ .Todos}} }">
@@ -45,15 +50,15 @@
       <div class="col-4">
         <h1 class="mb-4">Add Todo</h1>
 
-        <form method="POST" action="/submit-todo/">
+        <form
+          hx-post="/submit-todo/"
+          hx-target="#todo-table-body"
+          hx-swap="beforeend"
+        >
           <div class="mb-2">
             <label for="">Todo Name</label>
             <input type="text" name="name" class="form-control" />
           </div>
-          <!-- <div class="mb-2">
-            <label for="">Is Completed?</label>
-            <input type="checkbox" name="isCompleted" value="true" />
-          </div> -->
           <input type="submit" value="submit" class="btn btn-primary" />
         </form>
       </div>
