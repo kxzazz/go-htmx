@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -42,7 +43,15 @@ func indexHandler(w http.ResponseWriter, r *http.Request){
 	tmpl.ExecuteTemplate(w,"index.html",map[string]template.JS{"Todos":template.JS(json)})
 }
 
+func submitTodoHandler(w http.ResponseWriter, r *http.Request){
+	name := r.PostFormValue("name")
+	
+	todo := Todo{ Id : 4, Name: name, IsCompleted: false}
+	fmt.Println(todo)
+}
+
 func main(){
 	http.HandleFunc("/", indexHandler)
+	http.HandleFunc("/submit-todo/", submitTodoHandler)
 	log.Fatal(http.ListenAndServe(":8000",nil))
 }

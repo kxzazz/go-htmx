@@ -45,8 +45,16 @@
       <div class="col-4">
         <h1 class="mb-4">Add Todo</h1>
 
-        <form>
-          <!-- TBC -->
+        <form method="POST" action="/submit-todo/">
+          <div class="mb-2">
+            <label for="">Todo Name</label>
+            <input type="text" name="name" class="form-control" />
+          </div>
+          <!-- <div class="mb-2">
+            <label for="">Is Completed?</label>
+            <input type="checkbox" name="isCompleted" value="true" />
+          </div> -->
+          <input type="submit" value="submit" class="btn btn-primary" />
         </form>
       </div>
     </div>
