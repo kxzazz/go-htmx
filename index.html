@@ -11,9 +11,13 @@
       integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
       crossorigin="anonymous"
     />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.8/dist/cdn.min.js"
+    ></script>
   </head>
   <body class="container">
-    <div class="row mt-4 g-4">
+    <div class="row mt-4 g-4" x-data="{todos: {{ .Todos}} }">
       <div class="col-8">
         <h1 class="mb-4">Todo Items</h1>
 
@@ -26,8 +30,14 @@
             </tr>
           </thead>
 
-          <tbody>
-            <!-- TBC -->
+          <tbody id="todo-table-body">
+            <template x-for="todo in todos">
+              <tr>
+                <td x-text="todo.id"></td>
+                <td x-text="todo.name"></td>
+                <td x-text="todo.isCompleted"></td>
+              </tr>
+            </template>
           </tbody>
         </table>
       </div>
